@@ -1,0 +1,155 @@
+@charset "utf-8";
+// ===================================================================
+// 設定
+// 	#01_サポートするブラウザ
+// 	#02_画像関連
+// 	#03_色の設定
+// 	#04_フォント
+// 	#05_html5
+// 	#06_CSS3
+// 	#07_レイアウトサイズ
+// ===================================================================
+
+// ===================================================================
+// #01_サポートするブラウザ
+// ===================================================================
+
+	$support-ie6: false;
+	$support-ie7: false;
+	$support-ie8: true;
+	$support-ie9: true;
+	$support-mozilla: true;
+	$support-webkit : true;
+	$support-opera  : true;
+
+
+// ===================================================================
+// #02_画像関連
+// ===================================================================
+
+	$img_path: "../common/images/hogehoge/";
+	
+	//-----------------------------------------------------------------
+	//	sprite
+	//-----------------------------------------------------------------
+	
+	@mixin sprite($left,$top){
+     background:url('sprite.png') no-repeat $left +px $top +px;
+	}
+	
+	//----------------------------------------------------------------
+	//	opacity
+	//----------------------------------------------------------------
+	
+	$opacity_value: .55; 
+
+
+// ===================================================================
+// #03_色の設定
+// ===================================================================
+
+	$base: #333; 
+	$sub: #333;
+	$accent: #333; 
+	
+	$link: #06f;
+	$hover: #00f;
+	$visited: #00f;
+	$active: #00f; 
+
+	
+	//----------------------------------------------------------------
+	//	Brightness
+	//----------------------------------------------------------------
+	
+	@mixin link_color($color){
+		color:$color;
+		&:hover{
+			color:lighten($color, 20%);
+		}
+		&:visited{
+			color:darken($color, 30%);
+		}
+	}
+
+
+// ===================================================================
+// #04_フォント
+// ===================================================================
+
+	//-----------------------------------------------------------------
+	//	font-family
+	//-----------------------------------------------------------------
+	
+	@mixin font-family($type, $important: false) {
+		@if $important == 'important' or $important == true {
+			$important: ' !important';
+		} @else {
+			$important: '';
+		}
+		@if $type == sans-serif {
+			font-family: sans-serif#{$important};
+			@if $support-ie6 {
+				_font-family: 'MS PGothic', sans-serif#{$important};
+			}
+		} @else if $type == serif {
+			font-family: serif#{$important};
+			@if $support-ie6 {
+				_font-family: 'MS Gothic', serif#{$important};
+			}
+		} @else if $type == meiryo {
+			font-family: Meiryo, 'MS PGothic', sans-serif#{$important};
+		} @else if $type == monospace {
+			font-family: monospace#{$important};
+			@if $support-ie6 {
+				_font-family: 'MS Gothic', monospace#{$important};
+			}
+		} @else if $type == hiragino {
+			font-family: 'Hiragino Kaku Gothic Pro', Meiryo, 'MS PGothic', sans-serif#{$important};
+		} @else if $type == verdana {
+			font-family: Verdana, Arial, Helvetica, sans-serif#{$important};
+		} @else if $type == tahoma {
+			font-family: Tahoma, Arial, Helvetica, sans-serif#{$important};
+		}
+	}
+
+// ===================================================================
+// #05_html5
+// ===================================================================
+
+	$use-html5: true;
+
+// ===================================================================
+// #06_CSS3
+// ===================================================================
+
+	$set_prefix: -webkit-, -moz-, -ms-, -o-, '';
+	
+
+// ===================================================================
+// #07_横幅
+// ===================================================================
+
+	$page: 720px;   // ページ全体の横幅
+	$column: 60px;  // 12 columns = 720px
+	$gutter: 20px;  // 11 gutters = 220px
+	$base_margin_bottom: 15px;  // 要素の基本下マージン
+	
+	//-----------------------------------------------------------------
+	//	responsive
+	//-----------------------------------------------------------------
+	
+	@mixin responsive($count:1){
+	  width: percentage($column / $page * $count);
+	}
+	
+	//-----------------------------------------------------------------
+	//	grid
+	//-----------------------------------------------------------------
+	
+	@mixin grid-unit($span) {
+	  float: left;
+	  margin-right: $gutter-width;
+	  width: ($column * $span) + ($gutter * ($span - 1));
+	}
+
