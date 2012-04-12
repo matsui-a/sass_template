@@ -1,0 +1,183 @@
+@charset "utf-8";
+// ===================================================================
+// |-Mixin/
+// |  |-clearfix
+// |  |-min-height
+// |  |-inline-block
+// |  |-background-size
+// |  |-brightness
+// |  |-sprite
+// |  |-font-family
+// |-Mixin(for CSS3)/
+//    |-border-radius
+//    |-gradient
+//    |-text-shadow
+//    |-box-shadow
+//    |-box-sizing
+// ===================================================================
+
+// ===================================================================
+// Mixin
+// ===================================================================
+
+	//----------------------------------------------------------------
+	// clearfix
+	//----------------------------------------------------------------
+	
+	@mixin clearfix {
+		@if $support-ie6 or $support-ie7 {
+			*zoom: 1;
+		}
+		&:after {
+			content: "."; 
+			display: block;
+			clear: both;
+			height: 0; 
+			visibility: hidden;
+		}
+	}
+	
+	//----------------------------------------------------------------
+	// min-height
+	//----------------------------------------------------------------
+	
+	@mixin min_height($value) {
+		min-height: $value;
+		@if $support-ie6 {
+			_height: $value;
+		}
+	}
+	
+	//----------------------------------------------------------------
+	// inline-block
+	//----------------------------------------------------------------
+	
+	@mixin inline_block {
+		display: inline-block;
+		*display: inline;
+		@if $support-ie6 or $support-ie7 {
+			*zoom: 1;
+		}
+	}
+
+	//----------------------------------------------------------------
+	// background-size
+	//----------------------------------------------------------------
+	
+	@mixin bg_size($w, $h: auto) {
+		@each $prefix in $set_prefix {
+			#{$prefix}background-size: $w $h;
+		}
+	}
+	
+	//----------------------------------------------------------------
+	//	brightness
+	//----------------------------------------------------------------
+	
+	@mixin link_color($color){
+		color:$color;
+		&:hover{
+			color:lighten($color, 20%);
+		}
+		&:visited{
+			color:darken($color, 30%);
+		}
+	}
+	
+	//-----------------------------------------------------------------
+	//	sprite
+	//-----------------------------------------------------------------
+	
+	@mixin sprite($left,$top){
+     background:url('sprite.png') no-repeat $left +px $top +px;
+	}
+
+	//-----------------------------------------------------------------
+	//	font-family
+	//-----------------------------------------------------------------
+	
+	@mixin font-family($type, $important: false) {
+		@if $important == 'important' or $important == true {
+			$important: ' !important';
+		} @else {
+			$important: '';
+		}
+		@if $type == sans-serif {
+			font-family: sans-serif#{$important};
+			@if $support-ie6 {
+				_font-family: 'MS PGothic', sans-serif#{$important};
+			}
+		} @else if $type == serif {
+			font-family: serif#{$important};
+			@if $support-ie6 {
+				_font-family: 'MS Gothic', serif#{$important};
+			}
+		} @else if $type == meiryo {
+			font-family: Meiryo, 'MS PGothic', sans-serif#{$important};
+		} @else if $type == monospace {
+			font-family: monospace#{$important};
+			@if $support-ie6 {
+				_font-family: 'MS Gothic', monospace#{$important};
+			}
+		} @else if $type == hiragino {
+			font-family: 'Hiragino Kaku Gothic Pro', Meiryo, 'MS PGothic', sans-serif#{$important};
+		} @else if $type == verdana {
+			font-family: Verdana, Arial, Helvetica, sans-serif#{$important};
+		} @else if $type == tahoma {
+			font-family: Tahoma, Arial, Helvetica, sans-serif#{$important};
+		}
+	}
+
+// ===================================================================
+// Mixin for CSS3
+// ===================================================================
+
+	//----------------------------------------------------------------
+	//	border-radius
+	//----------------------------------------------------------------
+	
+	@mixin border_radius($br_value) {
+     @each $prefix in $set_prefix {
+          #{$prefix}border-radius: $br_value;
+     	}
+	}
+	
+	//----------------------------------------------------------------
+	//	gradient(for :Firefox3.6+、Safari 2+、Chrome)
+	//----------------------------------------------------------------
+	
+	@mixin gradient($br_value) {
+     @each $prefix in $set_prefix {
+          #{$prefix}gradient: $br_value;
+     	}
+	}
+	
+	//----------------------------------------------------------------
+	// text-shadow none
+	//----------------------------------------------------------------
+	
+	@mixin ts($br_value) {
+		@each $prefix in $set_prefix {
+			#{$prefix}text-shadow: none !important;;
+		}
+	}
+
+	//----------------------------------------------------------------
+	// box-shadow none
+	//----------------------------------------------------------------
+	
+	@mixin bs($br_value) {
+		@each $prefix in $set_prefix {
+			#{$prefix}box-shadow: none !important;;
+		}
+	}
+	
+	//----------------------------------------------------------------
+	// box-sizing
+	//----------------------------------------------------------------
+	
+	@mixin box($br_value) {
+		@each $prefix in $set_prefix {
+			#{$prefix}box-sizing: border-box;
+		}
+	}	
