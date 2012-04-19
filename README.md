@@ -81,11 +81,11 @@ Coreディレクトリ内で基礎となるファイルをいれてます。
      　　 |  |-sprite
      　　 |  |-font-family
      　　 |-Mixin(for CSS3)/
-     　　 |-border-radius
-     　　 |-gradient
-     　　 |-text-shadow
-     　　 |-box-shadow
-     　　 |-box-sizing
+     　　 　 |-border-radius
+     　　    |-gradient
+     　　    |-text-shadow
+     　　    |-box-shadow
+     　　    |-box-sizing
 
 
 ### 6._print.scss
